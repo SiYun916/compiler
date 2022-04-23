@@ -24,14 +24,18 @@ extern int line_no;
 {
     struct expr * exp;
     int number;
+    double double_number;
 };
 
 %start  Input
 
 %left '+'
+%left '-'
 %left '*'
+%left '/'
 
 %token <number> DIGIT
+%token <double_number> FLOAT
 
 %type <exp> Expr
 %type <exp> Term
@@ -89,6 +93,18 @@ Factor :  '(' Expr ')'
                 struct expr *tmp_node;
 
                 tmp_node = expr_alloc(INT_TYPE, $1);
+                if(NULL == tmp_node) {
+                    printf("memory alloc failed\n");
+                    exit(-1);
+                }
+              
+                $$ = tmp_node;
+            };
+       |  FLOAT
+            {
+                struct expr *tmp_node;
+
+                tmp_node = expr_alloc_float(REAL_TYPE, $1);
                 if(NULL == tmp_node) {
                     printf("memory alloc failed\n");
                     exit(-1);

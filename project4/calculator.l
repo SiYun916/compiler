@@ -29,6 +29,10 @@ white_line  [\n]
                 yylval.number = (int)strtol(yytext, (char **)NULL, 10);
                 return DIGIT;
             }
+{d}+\.{d}+  {
+                yylval.double_number = (double)strtod(yytext, (char **)NULL);
+                return FLOAT;
+            }
 
 "("			{return '(';}
 ")"			{return ')';}

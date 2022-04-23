@@ -45,7 +45,8 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    DIGIT = 258
+    DIGIT = 258,
+    FLOAT = 259
   };
 #endif
 
@@ -58,8 +59,9 @@ union YYSTYPE
 
     struct expr * exp;
     int number;
+    double double_number;
 
-#line 63 "calculator_yacc.h" /* yacc.c:1909  */
+#line 65 "calculator_yacc.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

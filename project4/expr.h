@@ -9,9 +9,12 @@ typedef struct expr
 {
     int type;
     int val;
+    double val_float;
 } expr;
 
 struct expr * expr_alloc();
+
+struct expr * expr_alloc_float();
 
 void expr_print(struct expr * obj);
 

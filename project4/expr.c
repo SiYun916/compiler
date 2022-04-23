@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include <string.h>
 
-// expression allocate
+// expression allocate int
 struct expr * expr_alloc(int type, int val)
 {
     struct expr *tmp_node = NULL;
@@ -18,6 +18,22 @@ struct expr * expr_alloc(int type, int val)
 
     tmp_node->type = type;
     tmp_node->val = val;
+
+    return tmp_node;
+}
+// expression allocate float
+struct expr * expr_alloc_float(int type, double val)
+{
+    struct expr *tmp_node = NULL;
+
+    tmp_node = (struct expr*)malloc(sizeof(struct expr));
+    if(NULL == tmp_node) {
+        printf("memory alloc failed\n");
+        return NULL;
+    }
+
+    tmp_node->type = type;
+    tmp_node->val_float = val;
 
     return tmp_node;
 }
