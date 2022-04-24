@@ -18,6 +18,7 @@ struct expr * expr_alloc(int type, int val)
 
     tmp_node->type = type;
     tmp_node->val = val;
+    tmp_node->val_float = val;
 
     return tmp_node;
 }
@@ -34,7 +35,6 @@ struct expr * expr_alloc_float(int type, double val)
 
     tmp_node->type = type;
     tmp_node->val_float = val;
-
     return tmp_node;
 }
 
@@ -43,6 +43,8 @@ void expr_print(struct expr * obj)
 {
     if(INT_TYPE == obj->type) {
         printf("%d\n", obj->val);
+    }else if(REAL_TYPE == obj->type){
+        printf("%f\n",obj->val_float);
     }
 }
 
@@ -50,9 +52,12 @@ void expr_print(struct expr * obj)
 int expr_add(struct expr * src1, struct expr *src2, struct expr * result)
 {
     // TODO real number add
-    result->type = src1->type;
-    result->val = src1->val + src2->val;
-
+    result->type = src1->type | src2->type;
+    if(result->type == INT_TYPE)
+        result->val = src1->val + src2->val;
+    else if(result->type == REAL_TYPE){
+        result->val_float = src1->val_float + src2->val_float;
+    }
     // Success
     return 0;
 }
@@ -61,9 +66,12 @@ int expr_add(struct expr * src1, struct expr *src2, struct expr * result)
 int expr_sub(struct expr * src1, struct expr *src2, struct expr * result)
 {
     // TODO real number add
-    result->type = src1->type;
-    result->val = src1->val - src2->val;
-
+    result->type = src1->type | src2->type;
+    if(result->type == INT_TYPE)
+        result->val = src1->val - src2->val;
+    else if(result->type == REAL_TYPE){
+        result->val_float = src1->val_float - src2->val_float;
+    }
     // Success
     return 0;
 }
@@ -71,10 +79,14 @@ int expr_sub(struct expr * src1, struct expr *src2, struct expr * result)
 // expresion multiply
 int expr_mult(struct expr * src1, struct expr *src2, struct expr * result)
 {
-    // TODO real number add
-    result->type = src1->type;
-    result->val = src1->val * src2->val;
-
+    // TODO real number mul
+    result->type = src1->type | src2->type;
+    if(result->type == INT_TYPE)
+        result->val = src1->val * src2->val;
+    else if(result->type == REAL_TYPE){
+            result->val_float = src1->val_float * src2->val_float;
+    }
+        
     // Success
     return 0;
 }
@@ -82,10 +94,13 @@ int expr_mult(struct expr * src1, struct expr *src2, struct expr * result)
 // expresion division
 int expr_div(struct expr * src1, struct expr *src2, struct expr * result)
 {
-    // TODO real number add
-    result->type = src1->type;
-    result->val = src1->val / src2->val;
-
+    // TODO real number div
+    result->type = src1->type | src2->type;
+    if(result->type == INT_TYPE)
+        result->val = src1->val / src2->val;
+    else if(result->type == REAL_TYPE){
+        result->val_float = src1->val_float / src2->val_float;
+    }
     // Success
     return 0;
 }

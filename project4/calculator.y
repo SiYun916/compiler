@@ -29,10 +29,8 @@ extern int line_no;
 
 %start  Input
 
-%left '+'
-%left '-'
-%left '*'
-%left '/'
+%left '+' '-'
+%left '*' '/'
 
 %token <number> DIGIT
 %token <double_number> FLOAT
@@ -88,23 +86,23 @@ Factor :  '(' Expr ')'
                 /* Factor=Expr */
                 $$ = $2;
             }
-       |  DIGIT
+       |  FLOAT
             {
                 struct expr *tmp_node;
 
-                tmp_node = expr_alloc(INT_TYPE, $1);
+                tmp_node = expr_alloc_float(REAL_TYPE, $1);
                 if(NULL == tmp_node) {
                     printf("memory alloc failed\n");
                     exit(-1);
                 }
               
                 $$ = tmp_node;
-            };
-       |  FLOAT
+            }
+       |  DIGIT
             {
                 struct expr *tmp_node;
 
-                tmp_node = expr_alloc_float(REAL_TYPE, $1);
+                tmp_node = expr_alloc(INT_TYPE, $1);
                 if(NULL == tmp_node) {
                     printf("memory alloc failed\n");
                     exit(-1);

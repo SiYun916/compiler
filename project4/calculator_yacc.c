@@ -449,8 +449,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    45,    45,    47,    51,    56,    60,    64,    70,    75,
-      80,    86,    91,   103
+       0,    43,    43,    45,    49,    54,    58,    62,    68,    73,
+      78,    84,    89,   101
 };
 #endif
 
@@ -499,7 +499,7 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,    12,    13,     0,     0,     2,     4,     7,    10,     0,
+       0,    13,    12,     0,     0,     2,     4,     7,    10,     0,
        1,     3,     0,     0,     0,     0,    11,     5,     6,     8,
        9
 };
@@ -1228,13 +1228,13 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 45 "calculator.y" /* yacc.c:1646  */
+#line 43 "calculator.y" /* yacc.c:1646  */
     {}
 #line 1234 "calculator_yacc.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 48 "calculator.y" /* yacc.c:1646  */
+#line 46 "calculator.y" /* yacc.c:1646  */
     {
                 expr_print((yyvsp[0].exp));
             }
@@ -1242,7 +1242,7 @@ yyreduce:
     break;
 
   case 4:
-#line 52 "calculator.y" /* yacc.c:1646  */
+#line 50 "calculator.y" /* yacc.c:1646  */
     {
                 expr_print((yyvsp[0].exp));
             }
@@ -1250,7 +1250,7 @@ yyreduce:
     break;
 
   case 5:
-#line 57 "calculator.y" /* yacc.c:1646  */
+#line 55 "calculator.y" /* yacc.c:1646  */
     {   /* Expr = Expr + Term */
                 expr_add((yyvsp[-2].exp), (yyvsp[0].exp), (yyval.exp));
             }
@@ -1258,7 +1258,7 @@ yyreduce:
     break;
 
   case 6:
-#line 61 "calculator.y" /* yacc.c:1646  */
+#line 59 "calculator.y" /* yacc.c:1646  */
     {   /* Expr = Expr - Term */
                 expr_sub((yyvsp[-2].exp), (yyvsp[0].exp), (yyval.exp));
             }
@@ -1266,7 +1266,7 @@ yyreduce:
     break;
 
   case 7:
-#line 65 "calculator.y" /* yacc.c:1646  */
+#line 63 "calculator.y" /* yacc.c:1646  */
     {
                 /* Expr = Term */
                 (yyval.exp) = (yyvsp[0].exp);
@@ -1275,7 +1275,7 @@ yyreduce:
     break;
 
   case 8:
-#line 71 "calculator.y" /* yacc.c:1646  */
+#line 69 "calculator.y" /* yacc.c:1646  */
     {
                 /* Term=Term*Factor */
                 expr_mult((yyvsp[-2].exp), (yyvsp[0].exp), (yyval.exp));
@@ -1284,7 +1284,7 @@ yyreduce:
     break;
 
   case 9:
-#line 76 "calculator.y" /* yacc.c:1646  */
+#line 74 "calculator.y" /* yacc.c:1646  */
     {
                 /* Term=Term*Factor */
                 expr_div((yyvsp[-2].exp), (yyvsp[0].exp), (yyval.exp));
@@ -1293,7 +1293,7 @@ yyreduce:
     break;
 
   case 10:
-#line 81 "calculator.y" /* yacc.c:1646  */
+#line 79 "calculator.y" /* yacc.c:1646  */
     {
                 /* Term = Factor */
                 (yyval.exp) = (yyvsp[0].exp);
@@ -1302,7 +1302,7 @@ yyreduce:
     break;
 
   case 11:
-#line 87 "calculator.y" /* yacc.c:1646  */
+#line 85 "calculator.y" /* yacc.c:1646  */
     {
                 /* Factor=Expr */
                 (yyval.exp) = (yyvsp[-1].exp);
@@ -1311,11 +1311,11 @@ yyreduce:
     break;
 
   case 12:
-#line 92 "calculator.y" /* yacc.c:1646  */
+#line 90 "calculator.y" /* yacc.c:1646  */
     {
                 struct expr *tmp_node;
 
-                tmp_node = expr_alloc(INT_TYPE, (yyvsp[0].number));
+                tmp_node = expr_alloc_float(REAL_TYPE, (yyvsp[0].double_number));
                 if(NULL == tmp_node) {
                     printf("memory alloc failed\n");
                     exit(-1);
@@ -1327,11 +1327,11 @@ yyreduce:
     break;
 
   case 13:
-#line 104 "calculator.y" /* yacc.c:1646  */
+#line 102 "calculator.y" /* yacc.c:1646  */
     {
                 struct expr *tmp_node;
 
-                tmp_node = expr_alloc_float(REAL_TYPE, (yyvsp[0].double_number));
+                tmp_node = expr_alloc(INT_TYPE, (yyvsp[0].number));
                 if(NULL == tmp_node) {
                     printf("memory alloc failed\n");
                     exit(-1);
@@ -1571,7 +1571,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 115 "calculator.y" /* yacc.c:1906  */
+#line 113 "calculator.y" /* yacc.c:1906  */
 
 
 void yyerror(char * msg)
