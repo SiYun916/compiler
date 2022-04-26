@@ -18,8 +18,10 @@ int line_no = 1;
 letter		[A-Za-z]
 alnum		[A-Za-z0-9]
 d			[0-9]
+Scnum       [+-][1-9].[0-9]+[Ee][+-][0-9]+
 white		[\t\040]
 white_line  [\n]
+
 
 /*****************************************
 *	RECOGNIION RULES	         *
@@ -30,6 +32,10 @@ white_line  [\n]
                 return DIGIT;
             }
 {d}\.{d}+  {
+                yylval.double_number = (double)strtod(yytext, (char **)NULL);
+                return FLOAT;
+            }
+{Scnum}    {
                 yylval.double_number = (double)strtod(yytext, (char **)NULL);
                 return FLOAT;
             }
